@@ -1,0 +1,348 @@
+{
+ "_source": "https://vera.waggle.ae/api/vera/v1/openapi.json, fetched 2026-10-19 (Vera API 1.1.0). Only the request schemas this package sends.",
+ "paths": {
+  "/v1/scrape": {
+   "method": "post",
+   "schema": "ScrapePayload"
+  },
+  "/v1/search": {
+   "method": "post",
+   "schema": "SearchPayload"
+  },
+  "/v1/search/news": {
+   "method": "post",
+   "schema": "SearchPayload"
+  },
+  "/v1/search/videos": {
+   "method": "post",
+   "schema": "SearchPayload"
+  },
+  "/v1/contacts": {
+   "method": "post",
+   "schema": "ContactPayload"
+  },
+  "/v1/products": {
+   "method": "post",
+   "schema": "ProductPayload"
+  }
+ },
+ "schemas": {
+  "ScrapePayload": {
+   "properties": {
+    "url": {
+     "type": "string",
+     "maxLength": 2048,
+     "minLength": 8,
+     "title": "Url"
+    },
+    "mode": {
+     "type": "string",
+     "enum": [
+      "manual",
+      "auto"
+     ],
+     "title": "Mode",
+     "default": "manual"
+    },
+    "max_cost": {
+     "anyOf": [
+      {
+       "type": "integer",
+       "maximum": 5.0,
+       "minimum": 1.0
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Max Cost"
+    },
+    "min_quality_score": {
+     "anyOf": [
+      {
+       "type": "integer",
+       "maximum": 100.0,
+       "minimum": 0.0
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Min Quality Score"
+    },
+    "render": {
+     "type": "boolean",
+     "title": "Render",
+     "default": false
+    },
+    "screenshot": {
+     "type": "boolean",
+     "title": "Screenshot",
+     "default": false
+    },
+    "return_html": {
+     "type": "boolean",
+     "title": "Return Html",
+     "default": false
+    },
+    "wait_ms": {
+     "type": "integer",
+     "maximum": 3000.0,
+     "minimum": 0.0,
+     "title": "Wait Ms",
+     "default": 500
+    },
+    "wait_for": {
+     "anyOf": [
+      {
+       "type": "string",
+       "maxLength": 200,
+       "minLength": 1
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Wait For"
+    },
+    "extract": {
+     "additionalProperties": {
+      "$ref": "#/components/schemas/ExtractionRule"
+     },
+     "type": "object",
+     "maxProperties": 10,
+     "title": "Extract"
+    },
+    "actions": {
+     "items": {
+      "$ref": "#/components/schemas/BrowserAction"
+     },
+     "type": "array",
+     "maxItems": 20,
+     "title": "Actions"
+    },
+    "user_agent": {
+     "anyOf": [
+      {
+       "type": "string",
+       "enum": [
+        "default",
+        "gptbot",
+        "oai-searchbot",
+        "chatgpt-user",
+        "claudebot",
+        "perplexitybot",
+        "google-extended",
+        "bingbot",
+        "googlebot"
+       ]
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "User Agent"
+    },
+    "country": {
+     "anyOf": [
+      {
+       "type": "string",
+       "pattern": "^[a-zA-Z]{2}$"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Country"
+    },
+    "proxy_type": {
+     "type": "string",
+     "enum": [
+      "auto",
+      "datacenter",
+      "residential"
+     ],
+     "title": "Proxy Type",
+     "default": "auto"
+    },
+    "response_format": {
+     "type": "string",
+     "enum": [
+      "text",
+      "markdown",
+      "all"
+     ],
+     "title": "Response Format",
+     "default": "all"
+    },
+    "markdown": {
+     "type": "boolean",
+     "title": "Markdown",
+     "default": false
+    },
+    "client_id": {
+     "anyOf": [
+      {
+       "type": "string",
+       "maxLength": 100
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Client Id"
+    },
+    "ignore_robots_on_unreadable": {
+     "type": "boolean",
+     "title": "Ignore Robots On Unreadable",
+     "default": false
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "url"
+   ],
+   "title": "ScrapePayload"
+  },
+  "SearchPayload": {
+   "properties": {
+    "query": {
+     "type": "string",
+     "maxLength": 500,
+     "minLength": 1,
+     "title": "Query"
+    },
+    "country": {
+     "type": "string",
+     "pattern": "^[a-z]{2}$",
+     "title": "Country",
+     "default": "us"
+    },
+    "language": {
+     "type": "string",
+     "pattern": "^[a-z]{2}$",
+     "title": "Language",
+     "default": "en"
+    },
+    "limit": {
+     "type": "integer",
+     "maximum": 1000.0,
+     "minimum": 1.0,
+     "title": "Limit",
+     "default": 10
+    },
+    "boost": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Boost"
+    },
+    "client_id": {
+     "anyOf": [
+      {
+       "type": "string",
+       "maxLength": 100
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Client Id"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "query"
+   ],
+   "title": "SearchPayload"
+  },
+  "ProductPayload": {
+   "properties": {
+    "url": {
+     "type": "string",
+     "maxLength": 2048,
+     "minLength": 8,
+     "title": "Url"
+    },
+    "marketplace": {
+     "anyOf": [
+      {
+       "type": "string",
+       "enum": [
+        "amazon",
+        "walmart",
+        "shopee"
+       ]
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Marketplace"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "url"
+   ],
+   "title": "ProductPayload"
+  },
+  "ContactPayload": {
+   "properties": {
+    "url": {
+     "type": "string",
+     "maxLength": 2048,
+     "minLength": 8,
+     "title": "Url"
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "url"
+   ],
+   "title": "ContactPayload"
+  },
+  "ExtractionRule": {
+   "properties": {
+    "selector": {
+     "type": "string",
+     "maxLength": 200,
+     "minLength": 1,
+     "title": "Selector"
+    },
+    "attribute": {
+     "anyOf": [
+      {
+       "type": "string",
+       "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Attribute"
+    },
+    "multiple": {
+     "type": "boolean",
+     "title": "Multiple",
+     "default": false
+    }
+   },
+   "additionalProperties": false,
+   "type": "object",
+   "required": [
+    "selector"
+   ],
+   "title": "ExtractionRule"
+  }
+ }
+}
