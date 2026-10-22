@@ -1,6 +1,7 @@
 # Publishes to PyPI when a GitHub release is published, using PyPI trusted publishing (no token).
-# One-time setup on pypi.org: add a trusted publisher for this repository, workflow "publish.yml",
-# environment "pypi". For the very first release you can instead create a pending publisher.
+# One-time setup on pypi.org: add a trusted publisher for Studio-Hyve/langchain-vera, workflow
+# "publish.yml", environment "pypi". For the very first release, create a pending publisher (the
+# project does not exist yet). Also create the "pypi" environment in the GitHub repository settings.
 name: Publish
 
 on:

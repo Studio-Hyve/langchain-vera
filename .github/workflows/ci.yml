@@ -28,3 +28,12 @@ jobs:
       - name: Unit tests
         # Live tests (marked "live") are deselected by default and never run here.
         run: uv run pytest
+
+  package:
+    # The wheel and sdist must build and pass twine's metadata and README checks, as at release.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv build
+      - run: uvx twine check dist/*

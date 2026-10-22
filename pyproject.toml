@@ -5,13 +5,16 @@ build-backend = "hatchling.build"
 [project]
 name = "langchain-vera"
 version = "0.1.0"
-description = "LangChain integration for Vera by Waggle: scrape pages to Markdown, search the web, and load pages as documents."
+description = "LangChain integration for Vera by Waggle: read pages, search the web, results pages, keyword ideas, AI answers, GEO radar, company footprints and a document loader."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "Waggle", email = "contact@waggle.ae" }]
 requires-python = ">=3.10"
-keywords = ["langchain", "vera", "waggle", "web scraping", "web search", "markdown", "rag", "agents"]
+keywords = [
+    "langchain", "vera", "waggle", "web scraping", "web search", "markdown", "rag", "agents",
+    "serp", "seo", "geo", "keyword research", "ai search",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -33,9 +36,9 @@ dependencies = [
 [project.urls]
 Homepage = "https://vera.waggle.ae"
 Documentation = "https://vera.waggle.ae/docs"
-Repository = "https://github.com/OWNER/langchain-vera"
-Issues = "https://github.com/OWNER/langchain-vera/issues"
-Changelog = "https://github.com/OWNER/langchain-vera/blob/main/CHANGELOG.md"
+Repository = "https://github.com/Studio-Hyve/langchain-vera"
+Issues = "https://github.com/Studio-Hyve/langchain-vera/issues"
+Changelog = "https://github.com/Studio-Hyve/langchain-vera/blob/main/CHANGELOG.md"
 
 [dependency-groups]
 test = [

@@ -214,7 +214,7 @@ class TestSearchTool:
     def test_search_types(self, search_type: str, path: str) -> None:
         client, recorder = make_client(success(RESULTS, charged=3))
         VeraSearchTool(client=client, search_type=search_type).invoke({"query": "q"})
-        assert recorder.last.url.path == "/api/vera/v1" + path
+        assert recorder.last.url.path == "/v1" + path
 
     def test_settings_are_sent(self) -> None:
         client, recorder = make_client(success(RESULTS, charged=3))

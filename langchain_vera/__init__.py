@@ -1,4 +1,4 @@
-"""LangChain integration for Vera by Waggle: tools and a document loader for scraping and search."""
+"""LangChain integration for Vera by Waggle: tools and a document loader for web data and search."""
 
 from importlib import metadata
 
@@ -19,7 +19,15 @@ from langchain_vera.errors import (
     VeraServerError,
     VeraTimeoutError,
 )
-from langchain_vera.tools import VeraScrapeTool, VeraSearchTool
+from langchain_vera.tools import (
+    VeraAiAnswersTool,
+    VeraCompanyFootprintTool,
+    VeraGeoRadarTool,
+    VeraKeywordIdeasTool,
+    VeraScrapeTool,
+    VeraSearchTool,
+    VeraSerpTool,
+)
 
 try:
     __version__ = metadata.version("langchain-vera")
@@ -30,13 +38,17 @@ del metadata
 __all__ = [
     "DEFAULT_BASE_URL",
     "VeraAPIError",
+    "VeraAiAnswersTool",
     "VeraAuthenticationError",
     "VeraClient",
+    "VeraCompanyFootprintTool",
     "VeraConfigurationError",
     "VeraConflictError",
     "VeraConnectionError",
     "VeraError",
+    "VeraGeoRadarTool",
     "VeraInsufficientCreditsError",
+    "VeraKeywordIdeasTool",
     "VeraLoader",
     "VeraPermissionError",
     "VeraRateLimitError",
@@ -45,6 +57,7 @@ __all__ = [
     "VeraResponseError",
     "VeraScrapeTool",
     "VeraSearchTool",
+    "VeraSerpTool",
     "VeraServerError",
     "VeraTimeoutError",
     "__version__",

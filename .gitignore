@@ -1,11 +1,26 @@
+# Environments and local secrets
 .venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Build output
 dist/
 build/
 *.egg-info/
+
+# Caches and test output
 __pycache__/
+*.py[cod]
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.benchmarks/
 .coverage
 htmlcov/
-.env
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/

@@ -98,7 +98,7 @@ def test_needs_urls_and_a_key() -> None:
 
 def test_builds_its_own_client_from_the_key() -> None:
     loader = VeraLoader("https://example.com", api_key="vera_live_test", timeout=5)
-    assert loader._client.base_url == "https://vera.waggle.ae/api/vera/v1"
+    assert loader._client.base_url == "https://vera.waggle.ae/v1"
 
 
 def test_a_refused_page_raises_by_default() -> None:

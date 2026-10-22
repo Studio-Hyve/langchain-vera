@@ -1,5 +1,6 @@
 {
- "_source": "https://vera.waggle.ae/api/vera/v1/openapi.json, fetched 2026-10-19 (Vera API 1.1.0). Only the request schemas this package sends.",
+ "_source": "https://vera.waggle.ae/v1/openapi.json, fetched 2026-10-22 (Vera API 1.1.0). Request schemas of the routes this package sends strictly, and the documented example bodies of the open-body search routes.",
+ "_toolsNote": "The search routes take any JSON object and their service checks the fields, so the schema is open. examples are the OpenAPI examples; knownFields are the names the service's request models accept (Fenlight: SearchRequest, KeywordIdeasRequest, AnswersRequest, GeoRadarRequest, CompanyRadarRequest).",
  "paths": {
   "/v1/scrape": {
    "method": "post",
@@ -343,6 +344,150 @@
     "selector"
    ],
    "title": "ExtractionRule"
+  }
+ },
+ "tools": {
+  "/v1/serp/{engine}": {
+   "method": "post",
+   "examples": {
+    "search": {
+     "q": "best coffee in dubai",
+     "gl": "ae",
+     "hl": "en",
+     "depth": 10
+    },
+    "with_local_pack": {
+     "q": "coffee shop",
+     "location": "Dubai",
+     "gl": "ae",
+     "hl": "en",
+     "depth": 10,
+     "features": [
+      "organic",
+      "paa",
+      "ai_overview",
+      "local_pack"
+     ]
+    }
+   },
+   "knownFields": [
+    "q",
+    "location",
+    "uule",
+    "gl",
+    "hl",
+    "depth",
+    "require_engine",
+    "engine",
+    "location_code",
+    "features",
+    "device",
+    "fresh",
+    "max_age_seconds"
+   ]
+  },
+  "/v1/keywords/ideas": {
+   "method": "post",
+   "examples": {
+    "ideas": {
+     "seed": "specialty coffee",
+     "gl": "ae",
+     "hl": "en",
+     "limit": 50,
+     "expand": "questions"
+    }
+   },
+   "knownFields": [
+    "seed",
+    "gl",
+    "hl",
+    "location",
+    "location_code",
+    "limit",
+    "expand",
+    "fresh",
+    "max_age_seconds"
+   ]
+  },
+  "/v1/ai/answers": {
+   "method": "post",
+   "examples": {
+    "answer": {
+     "prompt": "What are the best specialty coffee roasters in Dubai?",
+     "brand": "Roasters",
+     "brand_domain": "roasters.ae",
+     "competitors": [
+      "Other Roasters"
+     ],
+     "country": "ae",
+     "language": "en",
+     "samples": 1,
+     "engines": [
+      "chatgpt"
+     ]
+    }
+   },
+   "knownFields": [
+    "prompt",
+    "engines",
+    "brand",
+    "brand_domain",
+    "competitors",
+    "country",
+    "city",
+    "language",
+    "samples",
+    "include_answers"
+   ]
+  },
+  "/v1/geo/radar/query": {
+   "method": "post",
+   "examples": {
+    "radar": {
+     "query": "best specialty coffee roasters in dubai",
+     "brand": "Roasters",
+     "domain": "roasters.ae",
+     "location": "Dubai",
+     "gl": "ae",
+     "hl": "en",
+     "depth": 30
+    }
+   },
+   "knownFields": [
+    "query",
+    "brand",
+    "domain",
+    "location",
+    "gl",
+    "hl",
+    "depth",
+    "engine",
+    "fresh",
+    "max_age_seconds"
+   ]
+  },
+  "/v1/company/footprint": {
+   "method": "post",
+   "examples": {
+    "footprint": {
+     "company": "Roasters",
+     "domain": "roasters.ae",
+     "location": "Dubai",
+     "gl": "ae",
+     "hl": "en",
+     "depth": 20
+    }
+   },
+   "knownFields": [
+    "company",
+    "domain",
+    "location",
+    "gl",
+    "hl",
+    "depth",
+    "fresh",
+    "max_age_seconds"
+   ]
   }
  }
 }

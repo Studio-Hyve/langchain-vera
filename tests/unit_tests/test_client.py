@@ -12,6 +12,7 @@ import pytest
 from pydantic import SecretStr
 
 from langchain_vera import (
+    DEFAULT_BASE_URL,
     VeraAPIError,
     VeraAuthenticationError,
     VeraClient,
@@ -74,10 +75,16 @@ class TestSetup:
         client.scrape("https://example.com")
         assert str(recorder.last.url) == "https://vera.example/api/v1/scrape"
 
-    def test_default_base_url_is_production(self) -> None:
+    def test_default_base_url_is_the_direct_api_not_the_website_proxy(self) -> None:
         client, recorder = make_client()
         client.scrape("https://example.com")
-        assert str(recorder.last.url) == "https://vera.waggle.ae/api/vera/v1/scrape"
+        assert str(recorder.last.url) == "https://vera.waggle.ae/v1/scrape"
+        assert DEFAULT_BASE_URL == "https://vera.waggle.ae/v1"
+
+    def test_the_base_url_stays_configurable(self) -> None:
+        client, recorder = make_client(base_url="https://staging.vera.example/v1")
+        client.serp("coffee")
+        assert str(recorder.last.url) == "https://staging.vera.example/v1/serp/google"
 
 
 class TestScrapeRequest:
@@ -175,7 +182,7 @@ class TestSearchRequest:
     def test_endpoints(self, kind: str, path: str) -> None:
         client, recorder = make_client(success({"results": []}, charged=3))
         client.search("vera", kind=kind)  # type: ignore[arg-type]
-        assert recorder.last.url.path == "/api/vera/v1" + path
+        assert recorder.last.url.path == "/v1" + path
         assert recorder.body == {"query": "vera", "limit": 10}
 
     def test_options(self) -> None:
@@ -539,5 +546,5 @@ class TestContractWithPublishedOpenApi:
         ]
         for call in calls:
             call()
-            path = recorder.last.url.path.removeprefix("/api/vera/v1")
+            path = recorder.last.url.path.removeprefix("/v1")
             self._check(path, recorder.body)
